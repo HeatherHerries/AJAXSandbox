@@ -1,33 +1,62 @@
-document.getElementById("button").addEventListener("click", loadData);
+document.getElementById("button1").addEventListener("click", loadCustomer);
 
-function loadData() {
-  // Create XHR Object
+document.getElementById("button2").addEventListener("click", loadCustomers);
+
+// Load Single Customer
+function loadCustomer(e) {
   const xhr = new XMLHttpRequest();
 
-  // Open
-  xhr.open("GET", "data.txt", true);
-
-  // console.log("READYSTATE", xhr.readyState);
+  xhr.open("GET", "customer.json", true);
 
   xhr.onload = function() {
-    console.log("READYSTATE", xhr.readyState);
     if (this.status === 200) {
       // console.log(this.responseText);
-      document.getElementById(
-        "output"
-      ).innerHTML = `<h1>${this.responseText}</h1>`;
+
+      const customer = JSON.parse(this.responseText);
+
+      const output = `
+      <ul>
+        <li>ID: ${customer.id}</li>
+        <li>Name: ${customer.name}</li>
+        <li>Company: ${customer.company}</li>
+        <li>Phone: ${customer.phone}</li>
+      </ul>
+      `;
+
+      document.getElementById("customer").innerHTML = output;
     }
   };
 
-  // xhr.onreadystatechange = function() {
-  //   console.log("READYSTATE", xhr.readyState);
-  //   if (this.status === 200 && this.readyState === 4) {
-  //     console.log(this.responseText);
-  //   }
-  // };
+  xhr.send();
+}
 
-  xhr.onerror = function() {
-    console.log("Request error...");
+// Load Customers
+function loadCustomers(e) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.open("GET", "customers.json", true);
+
+  xhr.onload = function() {
+    if (this.status === 200) {
+      // console.log(this.responseText);
+
+      const customers = JSON.parse(this.responseText);
+
+      let output = "";
+
+      customers.forEach(function(customer) {
+        output += `
+      <ul>
+        <li>ID: ${customer.id}</li>
+        <li>Name: ${customer.name}</li>
+        <li>Company: ${customer.company}</li>
+        <li>Phone: ${customer.phone}</li>
+      </ul>
+      `;
+      });
+
+      document.getElementById("customers").innerHTML = output;
+    }
   };
 
   xhr.send();
