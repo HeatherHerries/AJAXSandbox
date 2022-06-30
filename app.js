@@ -1,58 +1,49 @@
-document.getElementById("button1").addEventListener("click", getText);
+// const sayHello = function() {
+//   console.log("Hello");
+// };
 
-document.getElementById("button2").addEventListener("click", getJSON);
+// const sayHello = () => {
+//   console.log("Hello");
+// };
 
-document.getElementById("button3").addEventListener("click", getExternal);
+// One Line Arrow Functions Does Not Need Braces
 
-// Get Local Text File Data
-function getJSON() {
-  fetch("posts.json")
-    .then(function(res) {
-      return res.json();
-    })
-    .then(function(data) {
-      console.log(data);
-      let output = "";
-      data.forEach(function(post) {
-        output += `<li>${post.title}</li>`;
-      });
-      document.getElementById("output").innerHTML = output;
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-}
+// const sayHello = () => console.log("Hello ");
 
-// Get Local JSON Data
-function getText() {
-  fetch("text.txt")
-    .then(function(res) {
-      return res.text();
-    })
-    .then(function(data) {
-      console.log(data);
-      document.getElementById("output").innerHTML = data;
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-}
+// One Line Returns
+// const sayHello = () => "Hello";
 
-// Get From External API
-function getExternal() {
-  fetch("https://api.github.com/users")
-    .then(function(res) {
-      return res.json();
-    })
-    .then(function(data) {
-      console.log(data);
-      let output = "";
-      data.forEach(function(user) {
-        output += `<li>${user.login}</li>`;
-      });
-      document.getElementById("output").innerHTML = output;
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-}
+// Traditional Return
+// const sayHello = function() {
+//   return "Hello";
+// };
+
+// Arrow Functions with Object Literal
+// const sayHello = () => ({
+//   msg: "Hello"
+// });
+
+// Arrow Functions with Single Parameter (No parethesis needed)
+// const sayHello = name => console.log(`Hello ${name}`);
+
+// Arrow Functions with Mulitiple Parameters (Need Parenthesis)
+// const sayHello = (firstName, lastName) =>
+//   console.log(`Hello ${firstName} ${lastName}`);
+// sayHello("Heather", "Herries");
+
+// Callbacks
+const users = ["Nathan", "John", "William"];
+
+// const nameLength = users.map(function(name) {
+//   return name.length;
+// });
+
+// Callbacks as an Arrow Function
+// const nameLength = users.map(name => {
+// return name.length;
+// });
+
+// Callbacks as an Even Shorter Arrow Function
+const nameLength = users.map(name => name.length);
+
+console.log(nameLength);
