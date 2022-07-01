@@ -1,49 +1,31 @@
-// const sayHello = function() {
-//   console.log("Hello");
-// };
+// async function myFunc() {
+//   const promise = new Promise((resolve, reject) => {
+//     setTimeout(() => resolve("Hello"), 1000);
+//   });
 
-// const sayHello = () => {
-//   console.log("Hello");
-// };
+//   const error = false;
 
-// One Line Arrow Functions Does Not Need Braces
+//   if (!error) {
+//     //This will wait until promise is resolved
+//     const res = await promise;
+//     return res;
+//   } else {
+//     await Promise.reject(new Error("Something went wrong"));
+//   }
+// }
 
-// const sayHello = () => console.log("Hello ");
+// myFunc()
+//   .then(res => console.log(res))
+//   .catch(err => console.log(err));
 
-// One Line Returns
-// const sayHello = () => "Hello";
+async function getUsers() {
+  // await response fo the fetch call
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
 
-// Traditional Return
-// const sayHello = function() {
-//   return "Hello";
-// };
+  // Only proceed once its resolved
+  const data = await response.json();
+  // Only proceed once the second promise is resolved
+  return data;
+}
 
-// Arrow Functions with Object Literal
-// const sayHello = () => ({
-//   msg: "Hello"
-// });
-
-// Arrow Functions with Single Parameter (No parethesis needed)
-// const sayHello = name => console.log(`Hello ${name}`);
-
-// Arrow Functions with Mulitiple Parameters (Need Parenthesis)
-// const sayHello = (firstName, lastName) =>
-//   console.log(`Hello ${firstName} ${lastName}`);
-// sayHello("Heather", "Herries");
-
-// Callbacks
-const users = ["Nathan", "John", "William"];
-
-// const nameLength = users.map(function(name) {
-//   return name.length;
-// });
-
-// Callbacks as an Arrow Function
-// const nameLength = users.map(name => {
-// return name.length;
-// });
-
-// Callbacks as an Even Shorter Arrow Function
-const nameLength = users.map(name => name.length);
-
-console.log(nameLength);
+getUsers().then(users => console.log(users));
